@@ -3,57 +3,217 @@
   if (!origins) return;
 
   origins.staffGuides = [
-    ['Ice Staff — Ull’s Arrow', [
-      'Build the staff: dig the three blue parts only while it is snowing. One part comes from dig sites in the spawn zone, one from the middle battlefield, and one from the church zone.',
-      'Get the records and crystal: the blue record is around Generator 2 / the Tank Station. Take the Gramophone to the Ice tunnel beside the church, enter the Crazy Place, and collect the blue crystal.',
-      'Build it at the blue pedestal on the lowest floor of the Excavation Site.',
-      'Crazy Place puzzle: read the dot pattern on the blue ice wall, then shoot the matching floating ceiling stone with the Ice Staff. Six stones must flip. The wall pattern changes after each correct shot; a wrong shot resets the flipped stones.',
-      'Freeze and break tombstone 1: to the right of the MP40 wall-buy near Generator 4. Shoot it with the Ice Staff, then immediately shoot it with any normal bullet weapon.',
-      'Freeze and break tombstone 2: between the Excavation Site and the nearby giant-robot footprint close to Generator 4.',
-      'Freeze and break tombstone 3: on the small hill reached by turning right from the rear exit of the Generator 2 bunker, beside the fallen robot hand.',
-      'Excavation rings: use the four levers in the lower Excavation Site until every ring light is blue. Shoot the blue orb underneath the rings with the Ice Staff; it will rise into the ceiling.',
-      'Soul charge: place the staff in the blue pedestal in the Crazy Place and kill roughly 20 zombies nearby. When the HUD staff icon gains a red outline, take Ull’s Arrow from the pedestal.',
-      'Upgrade result: charged shots create a long-lasting blizzard, and the alternate end of the staff can remotely revive teammates.'
-    ]],
-    ['Fire Staff — Kagutsuchi’s Blood', [
-      'Build the staff: obtain one red part from the Generator 6 reward chest after powering it, one by shooting down the glowing orange plane, and one from the first Panzer Soldat.',
-      'Get the records and crystal: the red record spawns around the church / Generator 6 area. Use the Gramophone at the Fire tunnel near Generator 1 on the route toward Generator 3, then collect the red crystal in the Crazy Place.',
-      'Build it at the red pedestal on the lowest floor of the Excavation Site.',
-      'Crazy Place cauldrons: kill about 30 zombies with the Fire Staff while they are standing on the metal grates in the Fire section. Continue until all four cauldrons are burning and the completion sound plays.',
-      'Church symbol puzzle: go upstairs in the church and identify the four glowing wall symbols. They correspond to numbered torches in the church basement; shoot only those four torches with the Fire Staff. The bloodstain represents torch 4, and 4 is always part of the answer. The other three numbers vary each game.',
-      'Confirm the church step: all four correct torches stay lit and a beam rises from the Excavation Site. A wrong torch does not complete the sequence, so re-read the upstairs symbols rather than firing at every torch.',
-      'Excavation rings: rotate the four rings until all ring lights are red, then shoot the red orb below them with the Fire Staff.',
-      'Soul charge: place the staff in the red Crazy Place pedestal and kill roughly 20 zombies nearby. Pick it up when the staff icon gains a red outline.',
-      'Upgrade result: Kagutsuchi’s Blood gains a charge attack that leaves a larger burning blast and can revive teammates with Sekhmet’s Vigor.'
-    ]],
-    ['Wind Staff — Boreas’ Fury', [
-      'Build the staff: collect one yellow part from the head of each giant robot—Freya at the church, Odin in the center, and Thor near spawn. Shoot the glowing foot before it steps on you to enter the robot.',
-      'Get the records and crystal: the yellow record is around Generator 5 / the Lightning tunnel entrance. Use the Gramophone at the Wind tunnel near Generator 4 and collect the yellow crystal in the Crazy Place.',
-      'Build it at the yellow pedestal on the lowest floor of the Excavation Site.',
-      'Crazy Place ring puzzle: stand in the Wind section and shoot the four suspended symbol rings to rotate them. Each row must line up with the matching symbol on the stone pillar. The starting positions change, but the completed pattern is fixed; the rings rise and an audio cue plays when correct.',
-      'Smoke ball 1: behind Stamin-Up near Generator 5. Shoot the stone ball with the Wind Staff until its smoke points toward the Excavation Site.',
-      'Smoke ball 2: between Generator 4 and the Wind tunnel. Rotate it until the smoke points toward the Excavation Site.',
-      'Smoke ball 3: on the outside No Man’s Land / tank-return path. Reach it by backtracking from the church or jumping from the returning tank, then rotate its smoke toward the Excavation Site.',
-      'Excavation rings: set all four ring lights to yellow and shoot the yellow orb with the Wind Staff.',
-      'Soul charge: place the staff in the yellow Crazy Place pedestal and kill roughly 20 zombies nearby. Pick up Boreas’ Fury after the red outline appears on the HUD icon.',
-      'Upgrade result: a charged shot creates a tornado that pulls in and kills nearby zombies; Sekhmet’s Vigor can revive teammates at range.'
-    ]],
-    ['Lightning Staff — Kimat’s Bite', [
-      'Build part 1: ride the tank from the church toward Generator 2 and jump right onto the cut-off wooden staircase before the Generator 2 trench.',
-      'Build part 2: on the tank’s return trip toward the church, jump left onto the scaffold connected to the Excavation Site and follow it to the part.',
-      'Build part 3: later on the same return trip, jump right onto the dirt path before the church and climb to the upper church area.',
-      'Get the records and crystal: the purple record is around Generator 4. Use the Gramophone at the Lightning tunnel near Generator 5, collect the purple crystal, and build the staff at the purple Excavation pedestal.',
-      'Crazy Place keyboard: number the seven keys on the bottom row from left to right. Shoot the three chords in this exact order: 1-3-6, then 3-5-7, then 2-4-6. The upper row is not used.',
-      'Electrical panel 1 — Generator 5: turn the dial DOWN.',
-      'Electrical panel 2 — church basement beside torch 3: turn the dial RIGHT.',
-      'Electrical panel 3 — church upstairs beside the repairable window: turn the dial UP.',
-      'Electrical panel 4 — immediately right of the Wind tunnel entrance: turn the dial UP.',
-      'Electrical panel 5 — spawn room at the bottom of the stairs: turn the dial LEFT.',
-      'Electrical panel 6 — Tank Station near Generator 2, left of the rear door: turn the dial DOWN.',
-      'Electrical panel 7 — behind the Excavation Site on the path toward the church: turn the dial UP. After the keyboard puzzle, the panels spark in this order until each is correct; they may also be pre-set earlier.',
-      'Excavation rings: rotate all four ring lights to purple, then shoot the purple orb with the Lightning Staff.',
-      'Soul charge: place the staff in the purple Crazy Place pedestal and kill 25 zombies nearby. Pick up Kimat’s Bite when the HUD icon has a red outline.',
-      'Upgrade result: charged shots release a moving electrical orb that chains and stuns zombies; Sekhmet’s Vigor can revive teammates remotely.'
-    ]]
+    {
+      id: 'ice',
+      element: 'Ice',
+      name: 'Ice Staff',
+      upgraded: 'Ull’s Arrow',
+      role: 'Best high-round staff · charged blizzard control',
+      build: [
+        ['Collect the three blue parts', 'Dig glowing dig sites only while it is snowing. One part comes from the spawn zone, one from the middle battlefield, and one from the church zone.'],
+        ['Find the blue record', 'Check the Generator 2 / Tank Station area.'],
+        ['Get the blue crystal', 'Place the Gramophone at the Ice tunnel beside the church, enter the Crazy Place, and take the crystal from the blue pedestal.'],
+        ['Assemble the staff', 'Build it at the blue pedestal on the lowest floor of the Excavation Site.']
+      ],
+      phases: [
+        {
+          label: 'PUZZLE 01',
+          title: 'Match the Crazy Place symbols',
+          steps: [
+            ['Read the ice-wall pattern', 'Look at the dot pattern displayed on the blue ice wall.'],
+            ['Shoot the matching ceiling stone', 'Use the Ice Staff on the floating ceiling stone whose symbol matches the wall.'],
+            ['Repeat six times', 'The wall changes after every correct shot. A wrong shot resets the stones already completed.']
+          ]
+        },
+        {
+          label: 'WORLD STEP',
+          title: 'Freeze and break the three tombstones',
+          note: 'Freeze each tombstone with the Ice Staff, then immediately shoot it with a normal bullet weapon.',
+          steps: [
+            ['Tombstone 1', 'Right of the MP40 wall-buy near Generator 4.'],
+            ['Tombstone 2', 'Between the Excavation Site and the nearby giant-robot footprint close to Generator 4.'],
+            ['Tombstone 3', 'On the hill reached by turning right from the rear exit of the Generator 2 bunker, beside the fallen robot hand.']
+          ]
+        },
+        {
+          label: 'EXCAVATION',
+          title: 'Align the blue rings',
+          steps: [
+            ['Set the ring color', 'Use the four levers on the lower Excavation levels until every ring light is blue.'],
+            ['Release the orb', 'Shoot the blue orb beneath the rings with the Ice Staff. It should rise into the ceiling.']
+          ]
+        },
+        {
+          label: 'FINAL CHARGE',
+          title: 'Charge the staff in the Crazy Place',
+          steps: [
+            ['Place the staff', 'Return it to the blue pedestal in the Crazy Place.'],
+            ['Collect souls', 'Kill roughly 20 zombies close to the pedestal.'],
+            ['Take Ull’s Arrow', 'The HUD staff icon gains a red outline when the charge is complete.']
+          ]
+        }
+      ],
+      result: 'Charged shots create a long-lasting blizzard. Sekhmet’s Vigor can remotely revive teammates.'
+    },
+    {
+      id: 'fire',
+      element: 'Fire',
+      name: 'Fire Staff',
+      upgraded: 'Kagutsuchi’s Blood',
+      role: 'Large burning blast · strong close-area control',
+      build: [
+        ['Generator 6 part', 'Power Generator 6 and collect the red part from its reward chest.'],
+        ['Plane part', 'Shoot down the glowing orange plane and collect the dropped part.'],
+        ['Panzer part', 'Defeat the first Panzer Soldat and pick up the part it drops.'],
+        ['Record, crystal, and assembly', 'Find the red record around the church / Generator 6 area. Open the Fire tunnel near Generator 1, collect the red crystal, and build the staff at the red Excavation pedestal.']
+      ],
+      phases: [
+        {
+          label: 'PUZZLE 01',
+          title: 'Ignite the Crazy Place cauldrons',
+          steps: [
+            ['Stand on the Fire grates', 'Fight in the Fire section of the Crazy Place while standing on the metal grates.'],
+            ['Fill all four cauldrons', 'Kill about 30 zombies with the Fire Staff until all four cauldrons burn and the completion sound plays.']
+          ]
+        },
+        {
+          label: 'PUZZLE 02',
+          title: 'Solve the church torch code',
+          note: 'The bloodstain represents torch 4, and torch 4 is always included. The other three numbers change each match.',
+          steps: [
+            ['Read the symbols upstairs', 'Identify the four glowing wall symbols on the upper church floor.'],
+            ['Convert symbols to torch numbers', 'Use the symbol-to-number pattern and note the four corresponding numbers.'],
+            ['Shoot the basement torches', 'Go to the church basement and shoot only those four numbered torches with the Fire Staff.'],
+            ['Confirm completion', 'The correct torches remain lit and a beam rises from the Excavation Site.']
+          ]
+        },
+        {
+          label: 'EXCAVATION',
+          title: 'Align the red rings',
+          steps: [
+            ['Set all rings red', 'Rotate the four Excavation rings until every ring light is red.'],
+            ['Release the orb', 'Shoot the red orb beneath the rings with the Fire Staff.']
+          ]
+        },
+        {
+          label: 'FINAL CHARGE',
+          title: 'Charge the staff in the Crazy Place',
+          steps: [
+            ['Place the staff', 'Return it to the red pedestal.'],
+            ['Collect souls', 'Kill roughly 20 zombies close to the pedestal.'],
+            ['Take Kagutsuchi’s Blood', 'Pick it up after the HUD staff icon gains a red outline.']
+          ]
+        }
+      ],
+      result: 'The charged attack creates a much larger burning blast. Sekhmet’s Vigor can remotely revive teammates.'
+    },
+    {
+      id: 'wind',
+      element: 'Wind',
+      name: 'Wind Staff',
+      upgraded: 'Boreas’ Fury',
+      role: 'Emergency knockback · charged tornado',
+      build: [
+        ['Enter all three giant robots', 'Shoot a glowing robot foot before it steps down, then enter through the opened foot.'],
+        ['Collect the yellow parts', 'One part is inside Freya at the church, one inside Odin in the center, and one inside Thor near spawn.'],
+        ['Get the yellow record and crystal', 'Find the record around Generator 5 / the Lightning tunnel entrance. Open the Wind tunnel near Generator 4 and collect the yellow crystal.'],
+        ['Assemble the staff', 'Build it at the yellow pedestal on the lowest floor of the Excavation Site.']
+      ],
+      phases: [
+        {
+          label: 'PUZZLE 01',
+          title: 'Align the Crazy Place symbol rings',
+          steps: [
+            ['Rotate the four rings', 'Shoot the suspended rings in the Wind section to rotate them.'],
+            ['Match every row', 'Line each row up with the corresponding symbol on the nearby stone pillar.'],
+            ['Listen for confirmation', 'The rings rise and an audio cue plays when the fixed completed pattern is correct.']
+          ]
+        },
+        {
+          label: 'WORLD STEP',
+          title: 'Aim the three smoke balls at Excavation',
+          note: 'Shoot each stone ball with the Wind Staff until its smoke stream points toward the Excavation Site.',
+          steps: [
+            ['Smoke ball 1', 'Behind Stamin-Up near Generator 5.'],
+            ['Smoke ball 2', 'Between Generator 4 and the Wind tunnel.'],
+            ['Smoke ball 3', 'On the outside No Man’s Land / tank-return path; reach it by backtracking from church or jumping from the returning tank.']
+          ]
+        },
+        {
+          label: 'EXCAVATION',
+          title: 'Align the yellow rings',
+          steps: [
+            ['Set all rings yellow', 'Rotate the four rings until every light is yellow.'],
+            ['Release the orb', 'Shoot the yellow orb beneath the rings with the Wind Staff.']
+          ]
+        },
+        {
+          label: 'FINAL CHARGE',
+          title: 'Charge the staff in the Crazy Place',
+          steps: [
+            ['Place the staff', 'Return it to the yellow pedestal.'],
+            ['Collect souls', 'Kill roughly 20 zombies close to the pedestal.'],
+            ['Take Boreas’ Fury', 'Pick it up after the HUD staff icon gains a red outline.']
+          ]
+        }
+      ],
+      result: 'A charged shot creates a tornado that pulls in and kills nearby zombies. Sekhmet’s Vigor can remotely revive teammates.'
+    },
+    {
+      id: 'lightning',
+      element: 'Lightning',
+      name: 'Lightning Staff',
+      upgraded: 'Kimat’s Bite',
+      role: 'Fast projectiles · chain stun utility',
+      build: [
+        ['Tank jump 1', 'Ride from church toward Generator 2 and jump right onto the cut-off wooden staircase before the Generator 2 trench.'],
+        ['Tank jump 2', 'On the return trip toward church, jump left onto the scaffold connected to the Excavation Site.'],
+        ['Tank jump 3', 'Later on the same return trip, jump right onto the dirt path before church and climb to the upper church area.'],
+        ['Record, crystal, and assembly', 'Find the purple record around Generator 4. Open the Lightning tunnel near Generator 5, collect the purple crystal, and build the staff at the purple Excavation pedestal.']
+      ],
+      phases: [
+        {
+          label: 'PUZZLE 01',
+          title: 'Play the Crazy Place keyboard code',
+          note: 'Number the seven keys on the bottom row from left to right. Do not use the upper row.',
+          code: ['1–3–6', '3–5–7', '2–4–6'],
+          steps: [
+            ['Shoot each chord in order', 'Complete the first chord, then the second, then the third. The sequence is the same every match.']
+          ]
+        },
+        {
+          label: 'PUZZLE 02',
+          title: 'Set the seven electrical panels',
+          note: 'After the keyboard puzzle, the panels spark in order until each is correct. They can also be set earlier.',
+          panels: [
+            ['Generator 5', 'DOWN'],
+            ['Church basement beside torch 3', 'RIGHT'],
+            ['Church upstairs beside the repairable window', 'UP'],
+            ['Immediately right of the Wind tunnel entrance', 'UP'],
+            ['Spawn room at the bottom of the stairs', 'LEFT'],
+            ['Tank Station near Generator 2, left of the rear door', 'DOWN'],
+            ['Behind Excavation on the path toward church', 'UP']
+          ]
+        },
+        {
+          label: 'EXCAVATION',
+          title: 'Align the purple rings',
+          steps: [
+            ['Set all rings purple', 'Rotate the four rings until every light is purple.'],
+            ['Release the orb', 'Shoot the purple orb beneath the rings with the Lightning Staff.']
+          ]
+        },
+        {
+          label: 'FINAL CHARGE',
+          title: 'Charge the staff in the Crazy Place',
+          steps: [
+            ['Place the staff', 'Return it to the purple pedestal.'],
+            ['Collect souls', 'Kill 25 zombies close to the pedestal.'],
+            ['Take Kimat’s Bite', 'Pick it up after the HUD staff icon gains a red outline.']
+          ]
+        }
+      ],
+      result: 'Charged shots release a moving electrical orb that chains and stuns zombies. Sekhmet’s Vigor can remotely revive teammates.'
+    }
   ];
 })();

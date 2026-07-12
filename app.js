@@ -221,8 +221,68 @@
 
   function renderStaffGuides(guides) {
     if (!guides?.length) return '';
-    return `<div class="subguide"><h4>Origins staff upgrade checklists</h4>${guides.map(guideItem => `
-      <article class="location-card"><h4>${escapeHTML(guideItem[0])}</h4><ol>${guideItem[1].map(step => `<li>${escapeHTML(step)}</li>`).join('')}</ol></article>`).join('')}</div>`;
+
+    return `<section class="staff-guides">
+      <header class="staff-guides-heading">
+        <div><span>ORIGINS // ELEMENTAL UPGRADES</span><h4>Full staff upgrade guides</h4></div>
+        <p>Open one staff at a time. Each guide separates construction, puzzles, ring alignment, and the final soul charge.</p>
+      </header>
+      <div class="staff-guide-list">${guides.map((staff, index) => renderStaffGuide(staff, index === 0)).join('')}</div>
+    </section>`;
+  }
+
+  function renderStaffGuide(staff, openByDefault = false) {
+    if (Array.isArray(staff)) {
+      return `<details class="staff-guide"${openByDefault ? ' open' : ''}>
+        <summary><div class="staff-summary-copy"><span class="staff-element">STAFF</span><strong>${escapeHTML(staff[0])}</strong></div><span class="staff-toggle">+</span></summary>
+        <div class="staff-guide-body"><ol class="legacy-staff-steps">${staff[1].map(step => `<li>${escapeHTML(step)}</li>`).join('')}</ol></div>
+      </details>`;
+    }
+
+    const buildSteps = renderGuideStepList(staff.build || []);
+    const phases = (staff.phases || []).map(phase => renderStaffPhase(phase)).join('');
+
+    return `<details class="staff-guide staff-${escapeHTML(staff.id || 'default')}"${openByDefault ? ' open' : ''}>
+      <summary>
+        <span class="staff-icon" aria-hidden="true">${escapeHTML((staff.element || '?').slice(0, 1))}</span>
+        <div class="staff-summary-copy">
+          <span class="staff-element">${escapeHTML(staff.element || 'Staff')}</span>
+          <strong>${escapeHTML(staff.name || '')} <small>→ ${escapeHTML(staff.upgraded || '')}</small></strong>
+          <p>${escapeHTML(staff.role || '')}</p>
+        </div>
+        <span class="staff-toggle" aria-hidden="true">+</span>
+      </summary>
+      <div class="staff-guide-body">
+        <section class="staff-phase build-phase">
+          <header><span>BUILD</span><h5>Construct the ${escapeHTML(staff.name || 'staff')}</h5></header>
+          ${buildSteps}
+        </section>
+        ${phases}
+        <aside class="staff-result"><span>UPGRADED EFFECT</span><p>${escapeHTML(staff.result || '')}</p></aside>
+      </div>
+    </details>`;
+  }
+
+  function renderStaffPhase(phase = {}) {
+    const steps = renderGuideStepList(phase.steps || []);
+    const note = phase.note ? `<div class="staff-note">${escapeHTML(phase.note)}</div>` : '';
+    const code = phase.code?.length ? `<div class="staff-code">${phase.code.map((value, index) => `<span><b>${index + 1}</b>${escapeHTML(value)}</span>`).join('')}</div>` : '';
+    const panels = phase.panels?.length ? `<div class="panel-grid">${phase.panels.map((panel, index) => `
+      <div class="panel-setting"><span>${String(index + 1).padStart(2, '0')}</span><p>${escapeHTML(panel[0])}</p><strong>${escapeHTML(panel[1])}</strong></div>`).join('')}</div>` : '';
+
+    return `<section class="staff-phase">
+      <header><span>${escapeHTML(phase.label || 'STEP')}</span><h5>${escapeHTML(phase.title || '')}</h5></header>
+      ${note}${code}${steps}${panels}
+    </section>`;
+  }
+
+  function renderGuideStepList(rows = []) {
+    if (!rows.length) return '';
+    return `<ol class="staff-step-list">${rows.map(row => {
+      const title = Array.isArray(row) ? row[0] : '';
+      const copy = Array.isArray(row) ? row[1] : row;
+      return `<li><div>${title ? `<strong>${escapeHTML(title)}</strong>` : ''}<p>${escapeHTML(copy)}</p></div></li>`;
+    }).join('')}</ol>`;
   }
 
   function renderSteps(rows = []) {
