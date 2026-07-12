@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090b0d" />
+  <meta name="description" content="115 Archive — an organized Black Ops II Zombies knowledge base with searchable maps, weapons, perks, buildables, mechanics, and strategies." />
+  <title>115 Archive — BO2 Zombies Knowledge Base</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#top" aria-label="115 Archive home">
+        <span class="brand-mark">115</span>
+        <span class="brand-copy"><strong>ARCHIVE</strong><small>BO2 ZOMBIES FIELD MANUAL</small></span>
+      </a>
+
+      <nav class="nav" aria-label="Archive sections">
+        <button class="nav-item active" data-category="All">
+          <span class="nav-icon">⌂</span><span>Overview</span><span class="nav-count" id="count-all">0</span>
+        </button>
+        <div id="category-nav"></div>
+      </nav>
+
+      <div class="sidebar-card">
+        <span class="eyebrow">ARCHIVE STATUS</span>
+        <strong><span id="entry-count">0</span> indexed entries</strong>
+        <p>Stable game facts, hidden mechanics, routes, and high-round notes.</p>
+      </div>
+
+      <p class="legal">Unofficial fan project. Not affiliated with Activision or Treyarch.</p>
+    </aside>
+
+    <main class="main" id="top">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menu-toggle" aria-label="Open navigation">☰</button>
+        <label class="search-shell" for="global-search">
+          <span aria-hidden="true">⌕</span>
+          <input id="global-search" type="search" placeholder="Search maps, weapons, perks, mechanics…" autocomplete="off" />
+          <kbd>/</kbd>
+        </label>
+        <button class="saved-button" id="saved-toggle" aria-pressed="false"><span>★</span> Saved <b id="saved-count">0</b></button>
+      </header>
+
+      <section class="hero" id="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">BLACK OPS II // ZOMBIES DATABASE</p>
+          <h1>Every route.<br><span>Every weapon.</span><br>One archive.</h1>
+          <p class="hero-description">A searchable, map-aware field manual built for quick answers during a match and deeper planning before a high-round run.</p>
+          <div class="hero-actions">
+            <button class="primary-button" data-jump="Maps">Explore maps</button>
+            <button class="secondary-button" data-jump="Weapons">Compare weapons</button>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="scope-ring ring-one"></div>
+          <div class="scope-ring ring-two"></div>
+          <div class="scope-ring ring-three"></div>
+          <div class="tally">||||<br>|</div>
+          <div class="hero-stat stat-a"><span>MAPS</span><strong id="hero-maps">0</strong></div>
+          <div class="hero-stat stat-b"><span>WEAPONS</span><strong id="hero-weapons">0</strong></div>
+          <div class="hero-stat stat-c"><span>ENTRIES</span><strong id="hero-entries">0</strong></div>
+        </div>
+      </section>
+
+      <section class="dashboard" id="dashboard">
+        <div class="section-heading">
+          <div><p class="eyebrow">QUICK ACCESS</p><h2>Field dashboard</h2></div>
+          <p>Jump into the information players reach for most often.</p>
+        </div>
+        <div class="quick-grid" id="quick-grid"></div>
+      </section>
+
+      <section class="library" id="library">
+        <div class="section-heading library-heading">
+          <div><p class="eyebrow" id="section-eyebrow">FULL DATABASE</p><h2 id="section-title">All entries</h2></div>
+          <div class="result-meta"><span id="result-count">0 results</span><button id="clear-filters" class="text-button" hidden>Clear filters</button></div>
+        </div>
+
+        <div class="filter-bar">
+          <div class="chip-row" id="filter-chips"></div>
+          <select id="sort-select" aria-label="Sort archive entries">
+            <option value="featured">Featured</option>
+            <option value="az">A–Z</option>
+            <option value="za">Z–A</option>
+          </select>
+        </div>
+
+        <div class="empty-state" id="empty-state" hidden>
+          <strong>No archive entries match that search.</strong>
+          <p>Try a map name, Pack-a-Punch name, perk, or mechanic.</p>
+        </div>
+        <div class="card-grid" id="card-grid"></div>
+      </section>
+
+      <section class="accuracy-note">
+        <div><span class="status-dot"></span><strong>Accuracy model</strong></div>
+        <p>Hidden systems such as persistent-upgrade triggers and the BO2 rank formula are labeled as community-documented because Treyarch did not publish complete formulas.</p>
+      </section>
+
+      <footer>
+        <span>115 ARCHIVE</span>
+        <span>Reviewed <time datetime="2026-07-12">July 12, 2026</time></span>
+        <a href="https://github.com" target="_blank" rel="noreferrer">Built for GitHub Pages</a>
+      </footer>
+    </main>
+  </div>
+
+  <dialog class="detail-dialog" id="detail-dialog">
+    <article id="dialog-content"></article>
+  </dialog>
+
+  <template id="archive-card-template">
+    <article class="archive-card">
+      <div class="card-topline"><span class="category-label"></span><button class="save-entry" aria-label="Save entry">☆</button></div>
+      <div class="card-symbol" aria-hidden="true"></div>
+      <h3></h3>
+      <p class="card-summary"></p>
+      <div class="tag-list"></div>
+      <button class="open-entry">Open field note <span>↗</span></button>
+    </article>
+  </template>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
